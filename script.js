@@ -11,7 +11,7 @@ function getQueryParams(url) {
 
 // Example product URL (can be dynamic)
 // const productUrl = "https://www.guyal.com?s=2121&sc=2&a1=pe&a2=am&m=spy&e1=ABCD&e2=ABCD&f=0";
-const productUrl = "https://www.guyal.com?s=4740";
+const productUrl = "https://www.guyal.com?s=2088&e1=nISHANT";
 
 // Extract parameters from the URL
 const params = getQueryParams(productUrl);
@@ -65,7 +65,7 @@ function imageGenerator(params) {
     let sku = params.s;
     console.log(sku);
 
-    const engravingSkus = [2089]; 
+    const engravingSkus = [2089, 4923, 3992, 2088];
 
     if (params.i) {
         // Get the character for initials (i.e., 'a', 'b', 'c', etc.)
