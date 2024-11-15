@@ -11,7 +11,7 @@ function getQueryParams(url) {
 
 // Example product URL (can be dynamic)
 // const productUrl = "https://www.guyal.com?s=2121&sc=2&a1=pe&a2=am&m=spy&e1=ABCD&e2=ABCD&f=0";
-const productUrl = "https://www.guyal.com?s=8368";
+const productUrl = "https://www.guyal.com?s=7444";
 
 // Extract parameters from the URL
 const params = getQueryParams(productUrl);
@@ -73,13 +73,25 @@ function imageGenerator(params) {
     //Need to insert default e1 and e2 params here
     const engravingSkus2 = [8363];
 
-    //
+    //Need to insert default e1, e2 and e3 params here
     const engravingSkus3 = [8364];
+
+    //Need to insert default number initials 
     const numberInitials = [7862];
+
+    //Need to insert default aplhabet initials 
     const aplhabetInitials = [1001, 9744];
+
+    //Need to insert default accent stone
     const accentSkus = [4919];
+
+    //Need to insert default stone stone
     const cstoneSkus = [7853];
+
+    //Need to insert default e1 values if i values are provided in the query
     const initialEngravingSkus = [7858, 7859, 7853];
+
+    // NEED TO FIX THIS
     const engravingSkusNums = [7444];
 
     if (params.i) {
@@ -98,7 +110,6 @@ function imageGenerator(params) {
     }
 
     console.log(`Adjusted SKU based on 'i' parameter: ${sku}`);
-
 
     optionsData += `sku=${sku}`
 
