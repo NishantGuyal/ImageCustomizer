@@ -9,7 +9,6 @@ function getQueryParams(url) {
     return paramsObj;
 }
 
-// Example product URL (can be dynamic)
 // const productUrl = "https://www.guyal.com?s=2121&sc=2&a1=pe&a2=am&m=spy&e1=ABCD&e2=ABCD&f=0";
 const productUrl = "https://www.guyal.com?s=7444";
 
@@ -154,19 +153,22 @@ function imageGenerator(params) {
         }
     }
 
+    //Fix for products that require a default engraving number to display images
     if (engravingSkusNums.includes(parseInt(sku))) {
         if (!params.e1) {
             optionsData += `&text0=1`;
         }
     }
 
+    //Fix for products that require a default engraving to display images
     if (engravingSkus2.includes(parseInt(sku))) {
         const e1 = params.e1 ? params.e1 : 'guyal';
         const e2 = params.e2 ? params.e2 : 'guyal';
         optionsData += `&text0=${e1}`;
         optionsData += `&text1=${e2}`;
     }
-
+    
+    //Fix for products that require a default engraving to display images
     if (engravingSkus3.includes(parseInt(sku))) {
         const e1 = params.e1 ? params.e1 : 'guyal';
         const e2 = params.e2 ? params.e2 : 'guyal';
@@ -176,43 +178,44 @@ function imageGenerator(params) {
         optionsData += `&text2=${e3}`;
     }
 
+    //Fix for products that require a default engraving numbers to display images
     if (numberInitials.includes(parseInt(sku))) {
-        // If both e1 and e2 are missing, set them to 1 by default
         const e1 = params.e1 ? params.e1 : '1';
         const e2 = params.e2 ? params.e2 : '1';
 
-        // Assign values of e1 and e2 to text0 and text1 respectively
         optionsData += `&text0=${e1}`;
         optionsData += `&text1=${e2}`;
     }
 
+    //Fix for products that require a default engraving alphabet to display images
     if (aplhabetInitials.includes(parseInt(sku))) {
-        // If both e1 and e2 are missing, set them to 1 by default
         const e1 = params.e1 ? params.e1 : 'a';
         const e2 = params.e2 ? params.e2 : 'a';
 
-        // Assign values of e1 and e2 to text0 and text1 respectively
         optionsData += `&text0=${e1}`;
         optionsData += `&text1=${e2}`;
     }
 
+    //Engraving Logic
     for (const key in params) {
         if (key.startsWith('e')) {
             const engravingIndex = key.slice(1);  // Extract the number after 'e'
             optionsData += `&text${engravingIndex - 1}=${params[key]}`;
         }
     }
-
-    // Stones Logic
-    const ALL_STONES = ['c', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10'];
-
+    
+    //Fix for default accent issue
     if (accentSkus.includes(parseInt(sku)) && !params.a1) {
         optionsData += `&accent1=gr`;
     }
 
+    //Fix for default stone issue
     if (cstoneSkus.includes(parseInt(sku)) && !params.c) {
         optionsData += `&center=gr`;
     }
+
+    // Stones Logic
+    const ALL_STONES = ['c', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10'];
 
     if (params['c']) {
         optionsData += `&center=${params['c']}`;
@@ -222,7 +225,7 @@ function imageGenerator(params) {
         const stoneKey = ALL_STONES[j];
 
         if (params.hasOwnProperty(stoneKey)) {
-            const sideIndex = parseInt(stoneKey.slice(1), 10); // Extract number from 's1', 's2', etc.
+            const sideIndex = parseInt(stoneKey.slice(1), 10); 
             if (stoneKey.startsWith('s') && params[stoneKey]) {
                 optionsData += `&side${sideIndex}=${params[stoneKey]}`;
             } else if (stoneKey.startsWith('a') && params[stoneKey]) {
@@ -230,6 +233,5 @@ function imageGenerator(params) {
             }
         }
     }
-
     return optionsData;
 }
